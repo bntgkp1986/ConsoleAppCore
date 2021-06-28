@@ -49,6 +49,35 @@ namespace ConsoleApp1
             connection.CloseSqlConnection();
             return employees;
         }
+
+        public async Task<List<EmployeeBo>> Select1()
+        {
+            ConnectionManager connection = new ConnectionManager();
+            SqlCommand command = new SqlCommand();
+            var employees = new List<EmployeeBo>();
+            command.Connection = connection.OpenSqlConnection();
+            command.CommandText = "SELECT * FROM Employee";
+            command.CommandType = System.Data.CommandType.Text;
+            var reader = await command.ExecuteReaderAsync();
+            float salary = 0F;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var employee = new EmployeeBo()
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Name = reader["Name"].ToString(),
+                        Address = reader["Address"].ToString(),
+                        Salary = float.TryParse(reader["Salary"].ToString(), out salary) == true ? salary : 0F,
+                        Department = reader["Department"].ToString()
+                    };
+                    employees.Add(employee);
+                }
+            }
+            connection.CloseSqlConnection();
+            return employees;
+        }
     }
 
     public class EmployeeBo

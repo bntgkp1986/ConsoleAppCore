@@ -9,7 +9,7 @@ namespace ConsoleApp1
     class Program
     {
         
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var employee = new Employee();
             //if(employee.Insert() > 0)
@@ -21,7 +21,9 @@ namespace ConsoleApp1
             //    Console.WriteLine("Something went wrong.");
             //}
 
-            var listOfEmployee = employee.Select();
+            //var listOfEmployee = await employee.Select();
+
+            var listOfEmployee = await employee.Select1();
 
             foreach (var item in listOfEmployee)
             {
