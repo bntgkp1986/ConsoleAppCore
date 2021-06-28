@@ -11,6 +11,23 @@ namespace ConsoleApp1
         
         static void Main(string[] args)
         {
+            var employee = new Employee();
+            //if(employee.Insert() > 0)
+            //{
+            //    Console.WriteLine("Inserted successfully.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Something went wrong.");
+            //}
+
+            var listOfEmployee = employee.Select();
+
+            foreach (var item in listOfEmployee)
+            {
+                Console.WriteLine($"Employee's details - name -  {item.Name} address - {item.Address}  Salary - {item.Salary}  and Department is - {item.Department}");
+            }
+
             Console.WriteLine("Hello world!!");
             Console.ReadLine();
         }
